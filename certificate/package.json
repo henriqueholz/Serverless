@@ -15,7 +15,10 @@
   "dependencies": {
     "@middy/core": "^2.5.3",
     "@middy/http-json-body-parser": "^2.5.3",
-    "aws-sdk": "^2.1126.0"
+    "@types/handlebars": "^4.1.0",
+    "aws-sdk": "^2.1126.0",
+    "dayjs": "^1.11.1",
+    "handlebars": "^4.7.7"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
