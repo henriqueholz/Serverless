@@ -25,17 +25,22 @@ const serverlessConfiguration: AWS = {
         Effect: "Allow",
         Action: ["dynamodb:*"],
         Resource: ["*"]
+      },
+      {
+        Effect: "Allow",
+        Action: ["s3:*"],
+        Resource: ["*"]
       }
     ]
   },
-  // import the function via paths
+  package: {individually: false, include: ["./src/templates/**"]},
   functions: { 
     generateCertificate: {
       handler: "src/functions/generateCertificate.handler",
       events : [
         {
           http: {
-            path: "hello",
+            path: "generateCertificate",
             method: "post",
             
             cors: true,
@@ -43,8 +48,20 @@ const serverlessConfiguration: AWS = {
         }
       ],
     }, 
+    verifyCertificate: {
+      handler: "src/functions/verifyCertificate.handler",
+      events : [
+        {
+          http: {
+            path: "verifyCertificate/{id}",
+            method: "get",
+            
+            cors: true,
+          }
+        }
+      ],
+    }
   },
-  package: { individually: true },
   custom: {
     esbuild: {
       bundle: true,
@@ -55,6 +72,7 @@ const serverlessConfiguration: AWS = {
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
+      external: ["chrome-aws-lambda"]
     },
     dynamodb: {
       stages: ["dev", "local"],

@@ -4,7 +4,9 @@
     "lib": [
       "ESNext"
     ],
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
